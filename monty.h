@@ -1,11 +1,16 @@
 #ifndef MONTY_H
 #define MONTY_H
 
-/** PROTOTYPES **/
+/** LIBRARIES **/
 
-int main(int argc, char *argv[]);
-void *push(stack_t **stack, unsigned int line_number);
-void *pall(stack_t **stack, unsigned int line_number);
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+/** GLOBAL VARIABLES **/
+
+#define MAX_LINE_LENGTH 1024
 
 /** STRUCTS **/
 
@@ -38,5 +43,17 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+/** PROTOTYPES **/
+
+int main(int argc, char *argv[]);
+void usage_error(void);
+void file_error(const char *filename);
+void malloc_error(void);
+void opcode_error(unsigned int line_number, const char *opcode);
+int is_number(char *string);
+int is_opcode(char *string);
+void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
 
 #endif /** END OF MONTY_H **/

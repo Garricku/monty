@@ -1,6 +1,45 @@
 #include "monty.h"
 
 /**
+ * usage_error - Prints an error message and exits with a FAILURE status.
+ * Return: Nothing.
+ */
+void usage_error(void)
+{
+	fprintf(stderr, "USAGE: monty file\n");
+	exit(EXIT_FAILURE);
+}
+/**
+ * file_error - Prints an error message and exits the program.
+ * @filename: The Path or file name of the file used as input.
+ * Return: Nothing.
+ */
+void file_error(const char *filename)
+{
+	fprintf(stderr, "Error: Can't open file <%s>\n", filename);
+	exit(EXIT_FAILURE);
+}
+/**
+ * malloc_error - Prints an error message and exits (EXIT_FAILURE).
+ * Return: Nothing.
+ */
+void malloc_error(void)
+{
+	fprintf(stderr, "Error: malloc failed\n");
+	exit(EXIT_FAILURE);
+}
+/**
+ * opcode_error - Prints an error message and exits with a status.
+ * @line_number: The current line number where the error occured.
+ * @opcode: The user input opcode that was found.
+ * Return: Nothing.
+ */
+void opcode_error(unsigned int line_number, const char *opcode)
+{
+	fprintf(stderr, "L<%d>: unknown instruction <%s>", line_number, opcode);
+	exit(EXIT_FAILURE);
+}
+/**
  * main - Entry point.
  * @argc: Argument count.
  * @argv: Argument vector.
@@ -9,40 +48,40 @@
 int main(int argc, char *argv[])
 {
 	FILE *file;
-	char *line = NULL, *opcode = NULL;
-	size_t len = 0;
-	ssize_t bytes_read;
+	char buffer[MAX_LINE_LENGTH], *argument = NULL, *opcode = NULL;
 	unsigned int line_number = 0;
 	instruction_t func;
-	stack_t *number = NULL;
+	stack_t *number;
 
 	if (argc != 2)
-	{
-		fprintf(stderr, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
+		usage_error();
 	file = fopen(argv[1], "r");
 	if (file == NULL)
-	{
-		fprintf(stderr, "Error: Can't open file <%s>\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
-	while ((bytes_read = getline(&line, &len, file)) != -1)
+		file_error(argv[1]);
+	while (fgets(buffer, MAX_LINE_LENGTH, file) != NULL)
 	{
 		line_number++;
-		opcode = get_opcode(line);
-		number = get_arg(line);
-
-		if ((is_opcode(opcode)) != NULL)
-			opcode(number, line_number);
+		opcode = strtok(buffer, " ");
+		argument = strtok(NULL, " ");
+		if (is_number(argument) == 1)
+		{
+			number = malloc(sizeof(stack_t));
+			if (number == NULL)
+			{
+				fclose(file);
+				malloc_error();
+			}
+			number->n = atoi(argument);
+			number->prev = NULL;
+			number->next = NULL;
+		}
+		if ((is_opcode(opcode)) != -1)
+			func.f(&number, line_number);
 		else
 		{
-			fprintf(stderr, "L<%d>: unknown instruction <%s>", line_number, opcode);
-			free(line);
 			fclose(file);
-			exit(EXIT_FAILURE);
+			opcode_error(line_number, opcode);
 		}
-		free(line);
 	}
 	fclose(file);
 	return (0);
