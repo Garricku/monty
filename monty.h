@@ -47,13 +47,16 @@ typedef struct instruction_s
 /** PROTOTYPES **/
 
 int main(int argc, char *argv[]);
+int is_number(char *string);
+int is_opcode(char *string);
 void usage_error(void);
 void file_error(const char *filename);
 void malloc_error(void);
 void opcode_error(unsigned int line_number, const char *opcode);
-int is_number(char *string);
-int is_opcode(char *string);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
+void stack(stack_t **stack, unsigned int line_number);
+void queue(stack_t **stack, unsigned int line_number);
 
 #endif /** END OF MONTY_H **/

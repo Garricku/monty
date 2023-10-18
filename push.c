@@ -8,34 +8,30 @@
  */
 void push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *new_TOS, *current_TOS;
+	stack_t *top_of_stack;
 
 	if (stack == NULL)
 	{
 		fprintf(stderr, "L<%d>: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	new_TOS = malloc(sizeof(stack_t));
-	if (new_TOS == NULL)
+	top_of_stack = malloc(sizeof(stack_t));
+	if (top_of_stack == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	new_TOS->n = (*stack)->n;
-	new_TOS->next = NULL;
-
-	if (*stack == NULL)
+	if (QUEUE == 1)
 	{
-		new_TOS->prev = NULL;
-		*stack = new_TOS;
-		return;
+		top_of_stack->n = stack;
+		top_of_stack->next = NULL;
 	}
-	current_TOS = *stack;
-
-	while (current_TOS->next != NULL)
+	else
 	{
-		current_TOS = current_TOS->next;
+		while (top_of_stack != NULL)
+			top_of_stack = top_of_stack->next;
+
+		top_of_stack->n = stack;
+		top_of_stack->next = NULL;
 	}
-	current_TOS->next = new_TOS;
-	new_TOS->prev = current_TOS;
 }
