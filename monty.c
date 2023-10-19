@@ -48,25 +48,24 @@ void opcode_error(unsigned int line_number, const char *opcode)
 int main(int argc, char **argv)
 {
 	FILE *file;
-	char *line = NULL;
-	size_t len = 0;
+	char line[256];
 	unsigned int line_number = 0;
 	stack_t *stack = NULL;
 
-	if (argc != 2)
+	if (argc < 2)
 		usage_error();
 
 	file = fopen(argv[1], "r");
 	if (file == NULL)
 		file_error(argv[1]);
 
-	while (fgets(line, len, file) != NULL)
+	while (fgets(line, sizeof(line), file) != NULL)
 	{
 		line_number++;
 		parse_line(line, &stack, line_number);
+		fflush(stdin);
 	}
 	free_stack(stack);
-	free(line);
 	fclose(file);
 	return (0);
 }

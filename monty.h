@@ -1,6 +1,10 @@
 #ifndef MONTY_H
 #define MONTY_H
 
+/** GLOBAL VARIABLE **/
+
+extern char current_mode;
+
 /** LIBRARIES **/
 
 #include <stdio.h>

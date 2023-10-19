@@ -15,7 +15,6 @@ stack_t *add_node(stack_t **stack, int n)
 	if (new_node == NULL)
 		malloc_error();
 
-
 	new_node->n = n;
 	new_node->prev = NULL;
 	new_node->next = *stack;

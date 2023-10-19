@@ -33,7 +33,7 @@ void parse_line(char *line, stack_t **stack, unsigned int line_number)
 	char *opcode;
 	int i;
 
-	opcode = strtok(line, " ");
+	opcode = strtok(line, " \n");
 	if (opcode == NULL || opcode[0] == '#')
 		return;
 

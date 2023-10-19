@@ -11,7 +11,7 @@ void _push(stack_t **stack, unsigned int line_number)
 	char *arg;
 	int n;
 
-	arg = strtok(NULL, " ");
+	arg = strtok(NULL, " \n");
 	if (arg == NULL || !is_number(arg))
 	{
 		fprintf(stderr, "L<%u>: usage: push integer\n", line_number);

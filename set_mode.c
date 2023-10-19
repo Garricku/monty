@@ -8,7 +8,7 @@
  */
 void _set_mode(stack_t **stack, char mode, unsigned int line_number)
 {
-	static char current_mode = 's';
+	char current_mode = 's';
 
 	if (mode == 's' && current_mode == 'q')
 		_rotr(stack, line_number);
