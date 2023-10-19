@@ -1,26 +1,5 @@
 #include "monty.h"
 
-instruction_t opcodes[] = {
-	{"push", _push},
-	{"pall", _pall},
-	{"pint", _pint},
-	{"pop", _pop},
-	{"swap", _swap},
-	{"add", _add},
-	{"nop", _nop},
-	{"sub", _sub},
-	{"div", _div},
-	{"mul", _mul},
-	{"mod", _mod},
-	{"pchar", _pchar},
-	{"pstr", _pstr},
-	{"rotl", _rotl},
-	{"rotr", _rotr},
-	{"stack", stack},
-	{"queue", queue},
-	{NULL, NULL}
-};
-
 /**
  * parse_line - Parses the line in the file to find an opcode.
  * @line: String to be checked for the opcode.
@@ -32,6 +11,26 @@ void parse_line(char *line, stack_t **stack, unsigned int line_number)
 {
 	char *opcode;
 	int i;
+
+	instruction_t opcodes[] = {
+		{"push", _push},
+		{"pall", _pall},
+		{"pint", _pint},
+		{"pop", _pop},
+		{"swap", _swap},
+		{"add", _add},
+		{"nop", _nop},
+		{"sub", _sub},
+		{"div", _div},
+		{"mul", _mul},
+		{"mod", _mod},
+		{"pchar", _pchar},
+		{"pstr", _pstr},
+		{"rotl", _rotl},
+		{"rotr", _rotr},
+		{"queue", queue},
+		{NULL, NULL}
+	};
 
 	opcode = strtok(line, " \n");
 	if (opcode == NULL || opcode[0] == '#')

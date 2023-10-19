@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * _sub - Subtracts the top element of the stack from the second top element 
+ * _sub - Subtracts the top element of the stack from the second top element.
  * of the stack.
  * @stack: A pointer to the top of the stack.
  * @line_number: The line number of the opcode.

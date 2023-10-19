@@ -72,6 +72,6 @@ void _rotl(stack_t **stack, unsigned int line_number);
 void _rotr(stack_t **stack, unsigned int line_number);
 void _set_mode(stack_t **stack, char mode, unsigned int line_number);
 void queue(stack_t **stack, unsigned int line_number);
-void stack(stack_t **stack, unsigned int line_number);
+void _stack(stack_t **stack, unsigned int line_number);
 
 #endif /** END OF MONTY_H **/

@@ -2,7 +2,7 @@
 
 /**
  * is_number - Checks if string is a number.
- * @string: To be checked.
+ * @str: To be checked.
  * Return: 1 if it is a number, 0 if it is not a number.
  */
 int is_number(char *str)

@@ -3,6 +3,7 @@
 /**
  * _add - Returns the sum of all the data (n) of a linked list.
  * @stack: The top of the stack
+ * @line_number: The current line number.
  * Return: The sum of n and n.
  */
 void _add(stack_t **stack, unsigned int line_number)
