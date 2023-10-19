@@ -36,7 +36,7 @@ void malloc_error(void)
  */
 void opcode_error(unsigned int line_number, const char *opcode)
 {
-	fprintf(stderr, "L<%d>: unknown instruction <%s>", line_number, opcode);
+	fprintf(stderr, "L<%u>: unknown instruction <%s>", line_number, opcode);
 	exit(EXIT_FAILURE);
 }
 /**
@@ -45,44 +45,28 @@ void opcode_error(unsigned int line_number, const char *opcode)
  * @argv: Argument vector.
  * Return: Always 0 success.
  */
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
 	FILE *file;
-	char buffer[MAX_LINE_LENGTH], *argument = NULL, *opcode = NULL;
+	char *line = NULL;
+	size_t len = 0;
 	unsigned int line_number = 0;
-	instruction_t func;
-	stack_t *number;
+	stack_t *stack = NULL;
 
 	if (argc != 2)
 		usage_error();
+
 	file = fopen(argv[1], "r");
 	if (file == NULL)
 		file_error(argv[1]);
-	while (fgets(buffer, MAX_LINE_LENGTH, file) != NULL)
+
+	while (fgets(line, len, file) != NULL)
 	{
 		line_number++;
-		opcode = strtok(buffer, " ");
-		argument = strtok(NULL, " ");
-		if (is_number(argument) == 1)
-		{
-			number = malloc(sizeof(stack_t));
-			if (number == NULL)
-			{
-				fclose(file);
-				malloc_error();
-			}
-			number->n = atoi(argument);
-			number->prev = NULL;
-			number->next = NULL;
-		}
-		if ((is_opcode(opcode)) != -1)
-			func.f(&number, line_number);
-		else
-		{
-			fclose(file);
-			opcode_error(line_number, opcode);
-		}
+		parse_line(line, &stack, line_number);
 	}
+	free_stack(stack);
+	free(line);
 	fclose(file);
 	return (0);
 }

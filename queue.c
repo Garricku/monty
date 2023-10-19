@@ -1,14 +1,11 @@
 #include "monty.h"
 
 /**
- * queue - Changes to queue mode.
- * @stack: Not used.
- * @line_number: Not used.
+ * queue - Sets to queue.
  */
 void queue(stack_t **stack, unsigned int line_number)
 {
-	(void)stack;
-	(void)line_number;
+	char mode = 'q';
 
-	QUEUE = 1;
+	_set_mode(stack, mode, line_number);
 }

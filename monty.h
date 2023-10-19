@@ -5,12 +5,8 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 #include <unistd.h>
-
-/** GLOBAL VARIABLES **/
-
-#define MAX_LINE_LENGTH 1024
+#include <stdlib.h>
 
 /** STRUCTS **/
 
@@ -46,17 +42,32 @@ typedef struct instruction_s
 
 /** PROTOTYPES **/
 
-int main(int argc, char *argv[]);
-int is_number(char *string);
-int is_opcode(char *string);
+int main(int argc, char **argv);
+int is_number(char *str);
+stack_t *add_node(stack_t **stack, int n);
+void free_stack(stack_t *stack);
+void parse_line(char *line, stack_t **stack, unsigned int line_number);
 void usage_error(void);
 void file_error(const char *filename);
 void malloc_error(void);
 void opcode_error(unsigned int line_number, const char *opcode);
-void push(stack_t **stack, unsigned int line_number);
-void pall(stack_t **stack, unsigned int line_number);
-void add(stack_t **stack, unsigned int line_number);
-void stack(stack_t **stack, unsigned int line_number);
+void _push(stack_t **stack, unsigned int line_number);
+void _pall(stack_t **stack, unsigned int line_number);
+void _add(stack_t **stack, unsigned int line_number);
+void _pint(stack_t **stack, unsigned int line_number);
+void _swap(stack_t **stack, unsigned int line_number);
+void _nop(stack_t **stack, unsigned int line_number);
+void _pop(stack_t **stack, unsigned int line_number);
+void _sub(stack_t **stack, unsigned int line_number);
+void _div(stack_t **stack, unsigned int line_number);
+void _mul(stack_t **stack, unsigned int line_number);
+void _mod(stack_t **stack, unsigned int line_number);
+void _pchar(stack_t **stack, unsigned int line_number);
+void _pstr(stack_t **stack, unsigned int line_number);
+void _rotl(stack_t **stack, unsigned int line_number);
+void _rotr(stack_t **stack, unsigned int line_number);
+void _set_mode(stack_t **stack, char mode, unsigned int line_number);
 void queue(stack_t **stack, unsigned int line_number);
+void stack(stack_t **stack, unsigned int line_number);
 
 #endif /** END OF MONTY_H **/

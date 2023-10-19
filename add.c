@@ -1,38 +1,20 @@
 #include "monty.h"
 
 /**
- * add - Returns the sum of all the data (n) of a linked list.
- * @head: The head node.
+ * _add - Returns the sum of all the data (n) of a linked list.
+ * @stack: The top of the stack
  * Return: The sum of n and n.
  */
-void add(stack_t **stack, unsigned int line_number)
+void _add(stack_t **stack, unsigned int line_number)
 {
-	int sum = 0, len = 0, full_len = 0;
-	stack_t *value = *stack;
+	int sum;
 
-	if (QUEUE == 1)
+	if (*stack == NULL || (*stack)->next == NULL)
 	{
-		while (len <= 2)
-		{
-			len++;
-			sum += value->n;
-			value = value->next;
-		}
+		fprintf(stderr, "L<%u>: can't add, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
 	}
-	else
-	{
-		while (value != NULL)
-		{
-			len++;
-			value = value->next;
-		}
-		full_len = len;
-		while (len > (full_len - 2))
-		{
-			sum += value->n;
-			value = value->prev;
-			len--;
-		}
-	}
-	printf("%d\n", sum);
+	sum = (*stack)->n + (*stack)->next->n;
+	_pop(stack, line_number);
+	(*stack)->n = sum;
 }
