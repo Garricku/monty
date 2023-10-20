@@ -16,7 +16,7 @@ void usage_error(void)
  */
 void file_error(const char *filename)
 {
-	fprintf(stderr, "Error: Can't open file <%s>\n", filename);
+	fprintf(stderr, "Error: Can't open file %s\n", filename);
 	exit(EXIT_FAILURE);
 }
 /**
@@ -36,7 +36,7 @@ void malloc_error(void)
  */
 void opcode_error(unsigned int line_number, const char *opcode)
 {
-	fprintf(stderr, "L<%u>: unknown instruction <%s>", line_number, opcode);
+	fprintf(stderr, "L%u: unknown instruction %s", line_number, opcode);
 	exit(EXIT_FAILURE);
 }
 /**
