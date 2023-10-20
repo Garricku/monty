@@ -36,7 +36,7 @@ void malloc_error(void)
  */
 void opcode_error(unsigned int line_number, const char *opcode)
 {
-	fprintf(stderr, "L%u: unknown instruction %s", line_number, opcode);
+	fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
 	exit(EXIT_FAILURE);
 }
 /**
