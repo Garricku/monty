@@ -52,7 +52,7 @@ int main(int argc, char **argv)
 	unsigned int line_number = 0;
 	stack_t *stack = NULL;
 
-	if (argc < 2)
+	if (argc != 2)
 		usage_error();
 
 	file = fopen(argv[1], "r");
